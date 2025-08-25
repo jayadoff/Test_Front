@@ -1,0 +1,46 @@
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  margin: 0 10px;
+}
+
+.nav-list a {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #34315D !important;
+}
+
+.nav-list li a:hover {
+  color: #FF284F !important;
+}
+
+
+
+.transparent-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  margin-left: 20px;
+  margin-right: 20px;/* This ensures the card container takes the full height of the viewport */
+}
+
+.transparent-card {
+  background-color: transparent;
+  /* Add other styles as needed */
+}
+.sub-title{
+  margin-top: 100px !important;
+  display: block;
+  font: 400 20px/1.3 'Hind Siliguri', sans-serif;
+  color: #540707;
+  text-align: center;
+  letter-spacing: 0;
+}

@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+.login-form-margin {
+    margin-bottom: 16px;
+  }
+
+  .login-form-forgot {
+    text-align: center;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+
+  .form-container {
+    box-shadow: 0 0 4px #ccc;
+    padding: 50px 30px;
+    margin-top: 20vh;
+    min-width: 350px;
+    max-width: 100%;
+  }
+
+  @media only screen and (max-width: 575px) {
+    .form-container {
+      box-shadow: none;
+      min-width: 95%;
+    }
+  }
+
+
+
+
+
+
+
+
+  /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+.example-input .ant-input {
+  width: 200px;
+  margin: 0 8px 8px 0;
+}
+nz-select {
+  width: 100%;
+}
+
+.example-input .ant-input {
+  width: 200px;
+  margin: 0 8px 8px 0;
+}
+
+// [nz-button] {
+//   margin-right: 8px;
+//   margin-bottom: 12px;
+//   width: 100%;
+// }
+// .ant-spin-nested-loading  {
+//     position: absolute !important;
+//     top: 50% !important;
+//     left: 40% !important;
+//     margin: 50px !important;
+//   }
+
+host ::ng-deep .avatar-uploader > .ant-upload {
+width: 128px;
+height: 128px;
+}
+.ant-picker
+{
+  width: 100%;
+}
+
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #e06506;
+  border-color: #e06506;
+}
+.ant-form label
+{
+  font-weight: 600;
+}
+
+// body {
+//   background-image: url('../src/assets/body_bg.gif');
+//   margin: 0;
+//   padding: 0;
+//   overflow-x: hidden;
+//   padding-right: 0px !important;
+//   line-height: 20px;
+//   font-size: 16px;
+// }
+
+
+[nz-button] {
+  color: #fff;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  border-color: #801986 !important;
+  border: 1px solid transparent !important;
+  background:  #801986 !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+}
+
+a:link {
+  color: #801986;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 600;
+}
+

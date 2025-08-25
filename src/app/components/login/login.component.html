@@ -1,0 +1,59 @@
+<div class="background">
+  <!-- <app-centered-card></app-centered-card> -->
+
+  <div class="card">
+    <div style="text-align: center; margin-bottom: 15px;">
+      <img src="../../../assets/dhc.png" alt="DHC" height="60px" width="60px">
+    </div>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div  nz-col
+        [nzSpan]="32"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 32 }"
+        [nzLg]="{ span: 32 }">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter admission roll!">
+          <nz-input-group nzPrefixIcon="number">
+            <input
+            (keypress)="numberOnly($event)"
+              nz-input
+              formControlName="admissionroll"
+              placeholder="Admission Roll"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter password!">
+          <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+              [(ngModel)]="password"
+            />
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <span
+              nz-icon
+              [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"
+            ></span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button class="login-form-button login-form-margin button" [nzType]="'primary'" [nzLoading]="isSaveLoading">
+        Login
+      </button>
+      <div class="login-form-forgot">
+        If you have no account?
+        <a routerLink="/registration">Sign Up</a>
+      </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="background">
+  <div class="card">
+    <div style="text-align: center; margin-bottom: 15px;">
+      <img src="../../../assets/dhc.png" alt="Message" height="60px" width="60px">
+    </div>
+    <form
+              nz-form
+              [formGroup]="validateForm"
+              class="login-form"
+              (ngSubmit)="submitForm()"
+            >
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Please input your otp!">
+                  <nz-input-group>
+                    <input
+                    (keypress)="numberOnly($event)"
+                      nz-input
+                      formControlName="otp"
+                      placeholder="Otp"
+                    />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+
+
+
+              <button
+                nz-button
+                class="login-form-button login-form-margin"
+                [nzType]="'primary'"
+                nzDanger
+                [nzLoading]="isSaveLoading"
+              >
+               Verify
+              </button>
+
+              <div *ngIf="otpTimer"  class="login-form-forgot">  {{transform(counter)}} </div>
+              <div *ngIf="resendbtnvisible" >
+                <div class="login-form-forgot">Didn't get the code?</div>
+                <div (click)="resendOtp()" style="text-align: center;">
+                  <p style="color: #801986; font-weight: 600; cursor: pointer;" >Resend</p>
+                </div>
+              </div>
+            </form>
+  </div>
+</div>

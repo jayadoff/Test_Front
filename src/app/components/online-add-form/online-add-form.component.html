@@ -1,0 +1,1519 @@
+<div class="transparent-card-container" style="margin-top: 100px">
+  <div class="transparent-card">
+    <form nz-form [formGroup]="validateForm">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div
+        nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 12 }"
+        [nzLg]="{ span: 12 }"
+      >
+        <div class="box" (click)="openFileInput()" *ngIf="!selectedImage">
+          <span
+            class="upload-icon"
+            nz-icon
+            [nzType]="loading ? 'loading' : 'plus'"
+          ></span>
+          <div class="ant-upload-text">Passport size</div>
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          style="display: none"
+          (change)="handleChange($event)"
+
+          #fileInput
+          accept=".jpeg,.jpg,.png"
+        />
+
+        <div class="box" *ngIf="selectedImage" (click)="openFileInput()">
+          <img
+            [src]="selectedImage"
+            class="selected-image"
+            alt="Selected Image"
+
+          />
+        </div>
+        <div *ngIf="fileSizeError" class="error-message">{{ fileSizeError }}</div>
+        <p style="color: gray">531 x 650 px (500 KB)</p>
+      </div>
+    
+      
+      </div>
+     
+
+        
+       
+      
+      
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+     
+        <div
+        
+        nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 12 }"
+        [nzLg]="{ span: 12 }"
+      >
+        <label class="custom-label">Group Name<span style="color: red">*</span></label>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please select group name!">
+            <nz-input-group nzSize="default">
+              <nz-select
+                nzAllowClear
+                nzShowSearch
+                formControlName="GROUP_NAME"
+                nzPlaceHolder="Select group name"
+                [nzCustomTemplate]="defaultTemplate"
+                nzSize="default"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.GROUP_CODE', $event)"
+               
+                
+              >
+              <nz-option
+              *ngFor="let option of groupList"
+              [nzValue]="option.nzValue"
+              [nzLabel]="option.nzLabel"
+            ></nz-option>
+              </nz-select>
+              <ng-template #defaultTemplate let-selected>
+                {{ selected.nzLabel }}
+              </ng-template>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Student Full Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter student full name!">
+              <nz-input-group nzSize="default" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  formControlName="STUDENT_NAME"
+                  placeholder="Enter student name"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.STUDENT_NAME', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Mobile Number<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control
+              [nzValidateStatus]="validateForm.controls['MOBILE']"
+              nzHasFeedback
+              nzErrorTip="Please input a valid phone number with a minimum length of 10 digits!"
+            >
+              <nz-input-group nzPrefixIcon="phone" nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  formControlName="SMS_MOBILE_NUM"
+                  nz-input
+                  placeholder="Enter mobile"
+                  id="'MOBILE'"
+                  minlength="11"
+                  maxlength="11"
+                  pattern="[0-9]*"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.SMS_MOBILE_NUM', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Birth Certificate No<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter birth Certificate No!">
+              <nz-input-group nzSize="default">
+               <input
+               (keypress)="numberOnly($event)"
+               nz-input
+                formControlName="BIRTH_REG_NUM"
+                placeholder="Birth Certificate No"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.BIRTH_REG_NUM', $event)"
+                pattern="[0-9]*"
+               >
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <!-- <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Date of Birth<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter date of birth!">
+              <nz-input-group nzSize="default">
+               <nz-date-picker
+              formControlName="DATE_OF_BIRTH"
+              nzFormat="dd/MM/yyyy"
+              nzPlaceHolder="Select date"
+             
+              (ngModelChange)="onModelChange('DD.BASIC_INFO.DATE_OF_BIRTH', $event)">
+            </nz-date-picker>
+
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div> -->
+
+      
+
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Nationality<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a nationality!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  formControlName="NATIONALITY_NAME"
+                  nzShowSearch
+                  nzAllowClear
+                  nzPlaceHolder="Select a Nationality "
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.NATIONALITY_CODE', $event)"
+
+                >
+                  <nz-option
+                    *ngFor="let item of nationalityList"
+                    [nzLabel]="item.NAME"
+                    [nzValue]="item.CODE"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Marital status<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a status!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  nzAllowClear
+                  nzShowSearch
+                  formControlName="MARRIED_STATUS"
+                  nzPlaceHolder="Select a status"
+                  [nzCustomTemplate]="defaultTemplate"
+                  nzSize="default"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.MARITAL_STATUS', $event)"
+                >
+                  <nz-option nzValue="Y" nzLabel="Married"></nz-option>
+                  <nz-option nzValue="N" nzLabel="Unmarried"></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Gender<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a gender!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  nzAllowClear
+                  formControlName="GENDER_CODE"
+                  nzPlaceHolder="Select a Gender"
+                  nzSize="default"
+                  nzShowSearch
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.GENDER_CODE', $event)"
+
+                >
+                  <nz-option
+                    *ngFor="let item of genderList"
+                    [nzLabel]="item.NAME"
+                    [nzValue]="item.CODE"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Blood Group<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a bollod group!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  nzAllowClear
+                  formControlName="BLOOD_GROUP_CODE"
+                  nzPlaceHolder="Blood Group name"
+                  nzSize="default"
+                  nzShowSearch
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.BLOOD_GROUP_CODE', $event)"
+
+                >
+                  <nz-option
+                    *ngFor="let item of bloodGroupList"
+                    [nzLabel]="item.NAME"
+                    [nzValue]="item.CODE"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Religion Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a religion!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  nzAllowClear
+                  formControlName="RELIGION_CODE"
+                  nzPlaceHolder="Select Religion"
+                  nzSize="default"
+                  nzShowSearch
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.RELIGION_CODE', $event)"
+
+                >
+                  <nz-option
+                    *ngFor="let item of religionList"
+                    [nzLabel]="item.NAME"
+                    [nzValue]="item.CODE"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >District Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a district!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                  nzAllowClear
+                  formControlName="DISTRICT_NAME"
+                  nzPlaceHolder="Select a district"
+                  nzSize="default"
+                  nzShowSearch
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.BIRTH_PLACE_CODE', $event)"
+                >
+                  <nz-option
+                    *ngFor="let item of districtList"
+                    [nzLabel]="item.NAME"
+                    [nzValue]="item.CODE"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!-- <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+        </div> -->
+
+        
+    <div nz-row [nzGutter]="16">
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 10 }"
+  >
+    <label class="custom-label"
+      >Present Address<span style="color: red">*</span></label
+    >
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter present address!">
+        <nz-textarea-count [nzMaxCharacterCount]="200">
+          <textarea
+            rows="3"
+            formControlName="PRESENT_ADDRESS"
+            nz-input
+            (ngModelChange)="checkPresentAddress($event)"
+            placeholder="'House No/Village: , Post Office: , Post Code:'"
+            (ngModelChange)="onModelChange('DD.BASIC_INFO.PRESENT_ADDR', $event)"
+            class="fixed-textarea"
+          ></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 4 }"
+  >
+    <nz-form-item>
+      <nz-form-control>
+        <br />
+        <label
+          nz-checkbox
+          [nzDisabled]="checkBoxDisable"
+          (change)="updateAddress($event)"
+          formControlName="IS_CHECK"
+        >
+        </label>
+        <span
+          class="non-clickable"
+          style="color: chocolate; margin-left: 10px; font-weight: 600;"
+          >Same as Present Address</span
+        >
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 10 }"
+  >
+    <label class="custom-label"
+      >Parmanent Address<span style="color: red">*</span></label
+    >
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please enter parmanent address!">
+        <nz-textarea-count [nzMaxCharacterCount]="200">
+          <textarea
+            rows="3"
+            formControlName="PARMANENT_ADDRESS"
+            nz-input
+            placeholder="'House No/Village: , Post Office: , Post Code:'"
+            (ngModelChange)="onModelChange('DD.BASIC_INFO.PERMANENT_ADDR', $event)"
+            class="fixed-textarea"
+          ></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+
+
+  
+    
+        <nz-divider nzText="Parents Information" nzOrientation="left"></nz-divider>
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Father's Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter fathers name!">
+              <nz-input-group nzSize="default" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  formControlName="FATHERS_NAME"
+                  placeholder="Enter fathers name"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.FATHERS_NAME', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Mother's Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter mothers name!">
+              <nz-input-group nzSize="default" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  formControlName="MOTHERS_NAME"
+                  placeholder="Enter mothers name"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.MOTHERS_NAME', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Father's Mobile Number<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control
+              [nzValidateStatus]="validateForm.controls['MOBILE']"
+              nzHasFeedback
+              nzErrorTip="Please input a valid phone number with a minimum length of 10 digits!"
+            >
+              <nz-input-group nzPrefixIcon="phone" nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  formControlName="FATHERS_CONTACT_NO"
+                  nz-input
+                  placeholder="Enter mobile"
+                  id="'MOBILE'"
+                  nz-input
+                  minlength="11"
+                  maxlength="11"
+                  pattern="[0-9]*"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.FATHER_CONTACT_NO', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Mother's Mobile Number<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control
+              [nzValidateStatus]="validateForm.controls['MOBILE']"
+              nzHasFeedback
+              nzErrorTip="Please input a valid phone number with a minimum length of 10 digits!"
+            >
+              <nz-input-group nzPrefixIcon="phone" nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  formControlName="MOTHERS_CONTACT_NO"
+                  nz-input
+                  placeholder="Enter mobile"
+                  id="'MOBILE'"
+                  nz-input
+                  minlength="11"
+                  maxlength="11"
+                  pattern="[0-9]*"
+                  (ngModelChange)="onModelChange('DD.BASIC_INFO.MOTHER_CONTACT_NO', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Father's Occupation<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a district!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                formControlName="FATHERS_OCCUPATION"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Select a occupation "
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.FATHER_OCCUPATION', $event)"
+
+              >
+                <nz-option *ngFor="let item of occupationList" [nzLabel]="item.NAME" [nzValue]="item.CODE"></nz-option>
+              </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Mother's Occupation<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select a district!">
+              <nz-input-group nzSize="default">
+                <nz-select
+                formControlName="MOTHERS_OCCUPATION"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Select a occupation "
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.MOTHER_OCCUPATION', $event)"
+
+              >
+                <nz-option *ngFor="let item of occupationList" [nzLabel]="item.NAME" [nzValue]="item.CODE"></nz-option>
+              </nz-select>
+                <ng-template #defaultTemplate let-selected>
+                  {{ selected.nzLabel }}
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Father's NID Number</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default">
+               <input
+               (keypress)="numberOnly($event)"
+               nz-input
+                formControlName="FATHERS_NID"
+                placeholder="Father's NID Number"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.FATHERS_NID', $event)"
+                pattern="[0-9]*"
+               >
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Mother's NID Number</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default">
+               <input
+               (keypress)="numberOnly($event)"
+               nz-input
+                formControlName="MOTHERS_NID"
+                placeholder="Mother's NID Number"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.MOTHERS_NID', $event)"
+                pattern="[0-9]*"
+               >
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Parent's Monthly Income<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter parents monthly income!">
+              <nz-input-group nzSize="default" >
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="PARENTS_INCOME"
+                  placeholder="Enter parents monthly income"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.PARENTS_MON_INCOME', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <nz-divider nzText="Guardian Information" nzOrientation="left"></nz-divider>
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Guardian's Name<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter fathers name!">
+              <nz-input-group nzSize="default" nzPrefixIcon="user">
+                <input
+                  nz-input
+                  formControlName="GUARDIAN_NAME"
+                  placeholder="Enter guardian's name"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.GUARDIAN_NAME', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <label class="custom-label"
+            >Guardian's Mobile Number<span style="color: red">*</span></label
+          >
+          <nz-form-item>
+            <nz-form-control
+              [nzValidateStatus]="validateForm.controls['MOBILE']"
+              nzHasFeedback
+              nzErrorTip="Please input a valid phone number with a minimum length of 10 digits!"
+            >
+              <nz-input-group nzPrefixIcon="phone" nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  formControlName="GUARDIAN_NUMBER"
+                  nz-input
+                  placeholder="Enter mobile"
+                  id="'MOBILE'"
+                  nz-input
+                  minlength="11"
+                  maxlength="11"
+                  pattern="[0-9]*"
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.GUARDIAN_NUMBER', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+    <div nz-col [nzSpan]="24"[nzXs]="{ span: 24 }"[nzSm]="{ span: 24 }" [nzMd]="{ span: 8 }"[nzLg]="{ span: 8 }">
+      <label class="custom-label">Guardian Address<span style="color: red">*</span></label>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please enter guardian address!">
+              <nz-textarea-count [nzMaxCharacterCount]="200">
+                <textarea rows="3" formControlName="GUARDIAN_ADDRESS" nz-input
+                placeholder="'House No/Village: , Post Office: , Post Code:'" 
+                (ngModelChange)="onModelChange('DD.BASIC_INFO.GUARDIAN_ADDRESS', $event)"
+                class="fixed-textarea"></textarea>
+              </nz-textarea-count>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    
+
+
+        
+
+
+
+      </div> 
+    
+   
+    
+
+
+      
+        <nz-divider nzText="JSC Exam Information" nzOrientation="left"></nz-divider>
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Institute Name<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter institute name!">
+              <nz-input-group nzSize="default">
+                <input
+                  nz-input
+                  formControlName="INS_NAME"
+                  placeholder="Enter institute name"
+                  (ngModelChange)="updateEducationInfo(0, 'INSTITUTE', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Passing Year<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select passing year!">
+              <nz-input-group nzSize="default" >
+                <nz-select
+                nzAllowClear
+                nzShowSearch
+                formControlName="PASSING_YEAR"
+                nzPlaceHolder="Select passing year"
+                [nzCustomTemplate]="defaultTemplate"
+                nzSize="default"
+                (ngModelChange)="updateEducationInfo(0, 'PASSING_YEAR', $event)"
+              >
+                <nz-option nzValue="2024" nzLabel="2024"></nz-option>
+                <nz-option nzValue="2023" nzLabel="2023"></nz-option>
+                <nz-option nzValue="2022" nzLabel="2022"></nz-option>
+                <nz-option nzValue="2021" nzLabel="2021"></nz-option>
+              </nz-select>
+              <ng-template #defaultTemplate let-selected>
+                {{ selected.nzLabel }}
+              </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Board Name<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please select board name!">
+              <nz-input-group nzSize="default" >
+                <nz-select
+                nzAllowClear
+                nzShowSearch
+                formControlName="BOARD_NAME"
+                nzPlaceHolder="Select a board"
+                [nzCustomTemplate]="defaultTemplate"
+                nzSize="default"
+                (ngModelChange)="updateEducationInfo(0, 'BOARD', $event)"
+              >
+                <nz-option nzValue="Dhaka" nzLabel="Dhaka"></nz-option>
+                <nz-option nzValue="Chattogram" nzLabel="Chattogram"></nz-option>
+                <nz-option nzValue="Rajshahi" nzLabel="Rajshahi"></nz-option>
+                <nz-option nzValue="Barisal" nzLabel="Barisal"></nz-option>
+                <nz-option nzValue="Sylhet" nzLabel="Sylhet"></nz-option>
+                <nz-option nzValue="Comilla" nzLabel="Comilla"></nz-option>
+                <nz-option nzValue="Jessore" nzLabel="Jessore"></nz-option>
+                <nz-option nzValue="Dinajpur" nzLabel="Dinajpur"></nz-option>
+                <nz-option nzValue="Madrasha" nzLabel="Madrasha"></nz-option>
+                <nz-option nzValue="BTEB" nzLabel="BTEB"></nz-option>
+                <nz-option nzValue="BOU" nzLabel="BOU"></nz-option>
+              </nz-select>
+              <ng-template #defaultTemplate let-selected>
+                {{ selected.nzLabel }}
+              </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Roll Number<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter roll number!">
+              <nz-input-group nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="ROLL_NUMBER"
+                  placeholder="Enter roll number"
+                  (ngModelChange)="updateEducationInfo(0, 'ROLL_NO', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Registration Number<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter registration number!">
+              <nz-input-group nzSize="default" >
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="REG_NO"
+                  placeholder="Enter registration number"
+                  (ngModelChange)="updateEducationInfo(0, 'REG_NO', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >GPA<span style="color: red"></span></label
+          >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter result!">
+              <nz-input-group nzSize="default" >
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="RESULT"
+                  placeholder="Enter GPA"
+                  (ngModelChange)="updateEducationInfo(0, 'RESULT', $event)"
+
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+
+
+
+        <nz-divider
+        [nzText]=" 'SSC Exam Information' "
+        nzOrientation="left"
+      ></nz-divider>
+      
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Institute Name</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default">
+                <input
+                  nz-input
+                  formControlName="INS_NAME_1"
+                  placeholder="Enter institute name"
+                  (ngModelChange)="updateEducationInfo(1, 'INSTITUTE', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Passing Year</label
+          >
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzSize="default" >
+                <nz-select
+                nzAllowClear
+                nzShowSearch
+                formControlName="PASSING_YEAR_1"
+                nzPlaceHolder="Select passing year"
+                [nzCustomTemplate]="defaultTemplate"
+                nzSize="default"
+                (ngModelChange)="updateEducationInfo(1, 'PASSING_YEAR', $event)"
+              >
+                <nz-option nzValue="2024" nzLabel="2024"></nz-option>
+                <nz-option nzValue="2023" nzLabel="2023"></nz-option>
+                <nz-option nzValue="2022" nzLabel="2022"></nz-option>
+                <nz-option nzValue="2021" nzLabel="2021"></nz-option>
+                <nz-option nzValue="2020" nzLabel="2020"></nz-option>
+                <nz-option nzValue="2019" nzLabel="2019"></nz-option>
+                <nz-option nzValue="2018" nzLabel="2018"></nz-option>
+              </nz-select>
+              <ng-template #defaultTemplate let-selected>
+                {{ selected.nzLabel }}
+              </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Board Name</label
+          >
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzSize="default" >
+                <nz-select
+                nzAllowClear
+                nzShowSearch
+                formControlName="BOARD_NAME_1"
+                nzPlaceHolder="Select a board"
+                [nzCustomTemplate]="defaultTemplate"
+                nzSize="default"
+                (ngModelChange)="updateEducationInfo(1, 'BOARD', $event)"
+              >
+                <nz-option nzValue="Dhaka" nzLabel="Dhaka"></nz-option>
+                <nz-option nzValue="Chattogram" nzLabel="Chattogram"></nz-option>
+                <nz-option nzValue="Rajshahi" nzLabel="Rajshahi"></nz-option>
+                <nz-option nzValue="Barisal" nzLabel="Barisal"></nz-option>
+                <nz-option nzValue="Sylhet" nzLabel="Sylhet"></nz-option>
+                <nz-option nzValue="Comilla" nzLabel="Comilla"></nz-option>
+                <nz-option nzValue="Jessore" nzLabel="Jessore"></nz-option>
+                <nz-option nzValue="Dinajpur" nzLabel="Dinajpur"></nz-option>
+                <nz-option nzValue="Madrasha" nzLabel="Madrasha"></nz-option>
+                <nz-option nzValue="BTEB" nzLabel="BTEB"></nz-option>
+              </nz-select>
+              <ng-template #defaultTemplate let-selected>
+                {{ selected.nzLabel }}
+              </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Roll Number</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default">
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="ROLL_NUMBER_1"
+                  placeholder="Enter roll number"
+                  (ngModelChange)="updateEducationInfo(1, 'ROLL_NO', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >Registration Number</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default" >
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="REG_NO_1"
+                  placeholder="Enter registration number"
+                  (ngModelChange)="updateEducationInfo(1, 'REG_NO', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 12 }"
+          [nzLg]="{ span: 12 }"
+        >
+          <label class="custom-label"
+            >GPA</label
+          >
+          <nz-form-item>
+            <nz-form-control >
+              <nz-input-group nzSize="default" >
+                <input
+                (keypress)="numberOnly($event)"
+                  nz-input
+                  formControlName="RESULT_1"
+                  placeholder="Enter GPA"
+                  (ngModelChange)="updateEducationInfo(1, 'RESULT', $event)"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <nz-divider
+        [nzText]=" 'Subject to Acceptance' "
+         nzOrientation="left"></nz-divider>
+        
+      
+
+
+<div   nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+
+        <div
+        
+          nz-col
+          [nzSpan]="24"
+          [nzXs]="{ span: 24 }"
+          [nzSm]="{ span: 24 }"
+          [nzMd]="{ span: 8 }"
+          [nzLg]="{ span: 8 }"
+        >
+          <nz-form-item>
+              <label><span nz-icon nzType="book" nzTheme="twotone"></span>Bangla(101-102)</label>
+          </nz-form-item>
+        </div>
+
+
+        <div
+        nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 8 }"
+        [nzLg]="{ span: 8 }"
+      >
+        <nz-form-item>
+            <label ><span nz-icon nzType="book" nzTheme="twotone"></span>English(107-108)</label>
+        </nz-form-item>
+      </div>
+
+      <div
+      nz-col
+      [nzSpan]="24"
+      [nzXs]="{ span: 24 }"
+      [nzSm]="{ span: 24 }"
+      [nzMd]="{ span: 8 }"
+      [nzLg]="{ span: 8 }"
+    >
+      <nz-form-item>
+          <label><span nz-icon nzType="book" nzTheme="twotone"></span>ICT(275)</label>
+      </nz-form-item>
+    </div>
+
+    <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 12 }"
+  >
+    <label class="custom-label">
+      Compulsory 1<span style="color: red">*</span>
+    </label>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select a compulsory!">
+        <nz-input-group nzSize="default">
+          <nz-select
+            nzAllowClear
+            formControlName="COMPULSORY_1"
+            nzPlaceHolder="Select a compulsory"
+            nzSize="default"
+            (ngModelChange)="checkCom1($event)"
+          >
+            <nz-option
+              *ngFor="let item of subList"
+              [nzLabel]="item.SUBJECT_NAME"
+              [nzValue]="item.SUBJECT_CODE"
+            ></nz-option>
+          </nz-select>
+          <ng-template #defaultTemplate let-selected>
+            {{ selected.nzLabel }}
+          </ng-template>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 12 }"
+  >
+    <label class="custom-label">
+      Compulsory 2<span style="color: red">*</span>
+    </label>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select a compulsory!">
+        <nz-input-group nzSize="default">
+          <nz-select
+            nzAllowClear
+            formControlName="COMPULSORY_2"
+            nzPlaceHolder="Select a compulsory"
+            nzSize="default"
+            (ngModelChange)="checkCom2($event)"
+          >
+            <nz-option
+              *ngFor="let item of subList"
+              [nzLabel]="item.SUBJECT_NAME"
+              [nzValue]="item.SUBJECT_CODE"
+            ></nz-option>
+          </nz-select>
+          <ng-template #defaultTemplate let-selected>
+            {{ selected.nzLabel }}
+          </ng-template>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 12 }"
+  >
+    <label class="custom-label">
+      Compulsory 3<span style="color: red">*</span>
+    </label>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select a compulsory!">
+        <nz-input-group nzSize="default">
+          <nz-select
+            nzAllowClear
+            formControlName="COMPULSORY_3"
+            nzPlaceHolder="Select a compulsory"
+            nzSize="default"
+            (ngModelChange)="checkCom3($event)"
+          >
+            <nz-option
+              *ngFor="let item of subList"
+              [nzLabel]="item.SUBJECT_NAME"
+              [nzValue]="item.SUBJECT_CODE"
+            ></nz-option>
+          </nz-select>
+          <ng-template #defaultTemplate let-selected>
+            {{ selected.nzLabel }}
+          </ng-template>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div
+    nz-col
+    [nzSpan]="24"
+    [nzXs]="{ span: 24 }"
+    [nzSm]="{ span: 24 }"
+    [nzMd]="{ span: 12 }"
+    [nzLg]="{ span: 12 }"
+  >
+    <label class="custom-label">
+      Optional<span style="color: red">*</span>
+    </label>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please select an optional!">
+        <nz-input-group nzSize="default">
+          <nz-select
+            nzAllowClear
+            formControlName="OPTIONAL"
+            nzPlaceHolder="Select an optional"
+            nzSize="default"
+            (ngModelChange)="checkOptional($event)"
+          >
+            <nz-option
+              *ngFor="let item of subList"
+              [nzLabel]="item.SUBJECT_NAME"
+              [nzValue]="item.SUBJECT_CODE"
+            ></nz-option>
+          </nz-select>
+          <ng-template #defaultTemplate let-selected>
+            {{ selected.nzLabel }}
+          </ng-template>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+
+      </div>
+
+
+      
+
+
+
+
+
+
+
+
+      </div>
+<br>
+<br>
+
+      <div>
+        <label formControlName="checkBox" nz-checkbox>I, the undersigned, hereby declare that the information provided in the admission form is completely true. If any information is found to be false, the admission will be considered cancelled. I also undertake to attend classes regularly, participate in exams, pay the college dues on time, and abide by all the rules and regulations. I accept that I shall be bound by any decisions made by the college authorities.</label>
+      </div>
+
+<br>
+
+
+
+      <button
+        style="margin-right: 8px; margin-bottom: 12px; width: 100%"
+        nz-button
+        nzType="primary"
+        nzSize="default"
+        nzDanger
+        (click)="SaveStudentForm()"
+        type="button"
+        [nzLoading]="isSaveLoading"
+      >
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<!-- custom modal content -->
+<ng-template #payNowTemplate>
+  <div style="text-align: center; font-size: 16px;">
+    <p style="font-weight: bold;">আপনার application টি submit করা হয়েছে।</p>
+    <p style="font-weight: bold;">
+      Payment করতে চাইলে 
+      <span style="color: rgb(234, 5, 5); font-weight: bold;">Pay Now</span> 
+      বাটনে ক্লিক করুন।
+    </p>
+
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+<button nz-button class="cancel-btn" (click)="onCancel()">
+  Cancel
+</button>
+
+
+
+
+      <button nz-button nzType="primary" (click)="onPayNow()">Pay Now</button>
+     
+    </div>
+  </div>
+</ng-template>
+

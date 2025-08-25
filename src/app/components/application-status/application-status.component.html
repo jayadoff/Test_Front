@@ -1,0 +1,134 @@
+<div>
+  <app-navbar></app-navbar>
+</div>
+
+
+<div *ngIf="isLoad" class="transparent-card-container" style="margin-top: 100px">
+  <div class="transparent-card">
+    <nz-skeleton  [nzActive]="true" [nzParagraph]="{ rows: 10 }"></nz-skeleton>
+
+  </div>
+</div>
+
+<div>
+<div class="transparent-card-container" style="margin-top: 100px"  *ngIf="!isLoad">
+  <div class="transparent-card">
+
+    <div class="top-card" *ngIf="isTopCardShow">
+
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" style="padding-top: 35px;">
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 4 }"
+        [nzLg]="{ span: 4 }">
+        <nz-form-item>
+          <button nz-button nzType="primary" [nzSize]="'small'" nzShape="round"
+          style="background-color: #7ACC5E; border-color: #7ACC5E;" (click)="applicationRpt()">
+            <span nz-icon nzType="download"></span>
+            Pdf
+          </button>
+        </nz-form-item>
+        </div>
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 4 }"
+        [nzLg]="{ span: 4 }">
+        <nz-form-item>
+          <p class="sub-title">{{studentInfoList?.DD?.BASIC_INFO?.ADMISSION_DATE}}</p>
+        </nz-form-item>
+        </div>
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 4 }"
+        [nzLg]="{ span: 4 }">
+        <nz-form-item>
+          <p class="sub-title">{{studentInfoList?.DD?.BASIC_INFO?.ADMISSION_ROLL}}</p>
+        </nz-form-item>
+        </div>
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 4 }"
+        [nzLg]="{ span: 4 }">
+        <nz-form-item>
+          <p class="sub-title">{{studentInfoList?.DD?.BASIC_INFO?.STUDENT_NAME}}</p>
+        </nz-form-item>
+        </div>
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 4 }"
+        [nzLg]="{ span: 4 }">
+          <nz-form-item>
+            <p class="sub-title">{{studentInfoList?.DD?.BASIC_INFO?.SMS_MOBILE_NUM}}</p>
+        </nz-form-item>
+        </div>
+        <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 24 }"
+        [nzSm]="{ span: 24 }"
+        [nzMd]="{ span: 3 }"
+        [nzLg]="{ span: 3 }">
+          <nz-form-item>
+            <p class="sub-title">{{paidStatus}}</p>
+          </nz-form-item>
+        </div>
+
+
+        <!-- <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 4}"
+        [nzSm]="{ span: 4 }"
+        [nzMd]="{ span: 1 }"
+        [nzLg]="{ span: 1 }">
+          <nz-form-item>
+            <button nz-button nzType="primary" [nzSize]="'default'" nzShape="circle"
+            style="background-color: #15ADAD; border-color: #15ADAD;">
+              <span nz-icon nzType="edit"></span>
+            </button>
+          </nz-form-item>
+        </div> -->
+
+        <!-- <div  nz-col
+        [nzSpan]="24"
+        [nzXs]="{ span: 4 }"
+        [nzSm]="{ span: 4 }"
+        [nzMd]="{ span: 1 }"
+        [nzLg]="{ span: 1 }">
+          <nz-form-item>
+            <button nz-button nzType="primary" [nzSize]="'default'" nzShape="circle" nzDanger>
+              <span nz-icon nzType="delete"></span>
+            </button>
+          </nz-form-item>
+        </div> -->
+
+      </div>
+
+</div>
+
+
+<br>
+<br>
+
+
+
+    <div>
+      <nz-steps [nzCurrent]="this.studentInfoList?.DD?.BASIC_INFO?.APPOVE_STATUS" nzDirection="vertical" nzSize="small">
+        <nz-step nzTitle="Submit Application" nzDescription="Complete and submit your application form."></nz-step>
+        <nz-step nzTitle="Complete Payment" nzDescription="Pay the application fee to proceed."></nz-step>
+        <nz-step nzTitle="Authorization Complete" nzDescription="Your application has been authorized successfully."></nz-step>
+      </nz-steps>
+    </div>
+  </div>
+
+</div>
+</div>
+

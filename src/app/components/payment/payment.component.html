@@ -1,0 +1,43 @@
+<div>
+  <app-navbar></app-navbar>
+</div>
+
+<div class="transparent-card-container">
+  <nz-card class="transparent-card">
+ 
+    <h2 class="card-title">💳 পেমেন্ট নির্দেশনা</h2>
+    <ul class="card-instructions">
+      <li>আপনার Application টি সফলভাবে submit করা হয়েছে।</li>
+         <li>নির্ধারিত পেমেন্ট: <b>৫,০০০ টাকা</b></li>
+  <li>Payment করতে আপনার active ব্যাংক account বা mobile banking ready রাখুন।</li>
+   <li>Payment করার জন্য নিচের <b>Pay Now</b> বাটনটি ব্যবহার করুন।</li>
+  <li>Transaction সম্পন্ন হওয়ার পর confirmation পেজ দেখুন।</li>
+  <li>যদি কোনো সমস্যা হয়, support team এর সাথে যোগাযোগ করুন।</li>
+    </ul>
+
+ <form [formGroup]="paymentForm">
+  <div class="row">
+           <nz-form-item>
+  <nz-form-label [nzSpan]="6">Amount</nz-form-label>
+  <nz-form-control [nzSpan]="18" nzErrorTip="Please enter payment amount">
+    <input
+      (keypress)="numberOnly($event)"
+      nz-input
+      formControlName="PAY_AMOUNT"
+      placeholder="Enter payment amount"
+    />
+  </nz-form-control>
+</nz-form-item>
+
+        </div>
+    </form>
+    <div class="card-button">
+      <button nz-button nzType="primary" (click)="onPayNow()">
+        Pay Now
+      </button>
+    </div>
+  </nz-card>
+</div>
+
+
+

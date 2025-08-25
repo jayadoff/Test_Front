@@ -1,0 +1,30 @@
+.transparent-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* viewport height */
+}
+
+.transparent-card {
+  width: 450px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  text-align: center;
+  color: #1890ff;
+  margin-bottom: 20px;
+}
+
+.card-instructions {
+  font-size: 14px;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+.card-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
